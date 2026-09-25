@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://partizanov-landing.vercel.app/sitemap.xml
