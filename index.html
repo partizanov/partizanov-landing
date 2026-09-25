@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="description" content="Partizanov — cinematic BODYCAM and tactical gameplay edits." />
+  <title>PARTIZANOV — Video Editor</title>
+  <link rel="preload" href="assets/hero.webp" as="image" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span></span></div>
+
+  <header class="nav glass glass-reactive">
+    <a class="brand" href="#top" aria-label="Partizanov home">PARTIZANOV</a>
+    <nav aria-label="Primary navigation">
+      <a href="#top" class="active">HOME</a>
+      <a href="#edits">EDITS</a>
+      <a href="#about">ABOUT</a>
+    </nav>
+    <a class="nav-cta magnetic" href="https://youtube.com/@partizanovoper?si=gcBgaA5g1dwEPx7L" target="_blank" rel="noreferrer">WATCH <span>↗</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Partizanov introduction">
+      <div class="hero-media" aria-hidden="true">
+        <div class="hero-image"></div>
+        <div class="hero-vignette"></div>
+      </div>
+
+      <div class="hud hud-left" aria-hidden="true">
+        <span class="cross"></span>
+        <span>BODYCAM</span><span>TACTICAL</span><span>REALISM</span>
+      </div>
+      <div class="hud hud-right" aria-hidden="true">
+        <span>REC</span><i></i><span>PARTIZANOV / 01</span>
+      </div>
+
+      <div class="hero-copy reveal">
+        <p class="eyebrow">CINEMATIC / TACTICAL / EDITS</p>
+        <h1 class="venom" data-text="PARTIZANOV">PARTIZANOV</h1>
+        <p class="tagline">VIDEO EDITOR</p>
+        <p class="intro">Cinematic edits built from BODYCAM, tactical gameplay and raw atmosphere. No noise. Just pressure, motion and frame-perfect cuts.</p>
+
+        <div class="socials">
+          <a class="social glass glass-reactive magnetic" href="https://youtube.com/@partizanovoper?si=gcBgaA5g1dwEPx7L" target="_blank" rel="noreferrer" aria-label="Partizanov on YouTube">
+            <span class="social-icon youtube" aria-hidden="true"></span>
+            <span><b>YOUTUBE</b><small>WATCH EDITS</small></span>
+            <em>↗</em>
+          </a>
+          <a class="social glass glass-reactive magnetic" href="https://www.tiktok.com/@operpartizanov?_r=1&_t=ZS-9A1yUT9yCQ6" target="_blank" rel="noreferrer" aria-label="Partizanov on TikTok">
+            <span class="social-icon tiktok" aria-hidden="true">♪</span>
+            <span><b>TIKTOK</b><small>SHORT CUTS</small></span>
+            <em>↗</em>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-quote reveal" aria-hidden="true">
+        <span>SAME GAME.</span><span>DIFFERENT</span><span>PERSPECTIVE.</span>
+      </div>
+
+      <a href="#edits" class="scroll-cue" aria-label="Scroll to edits"><span></span>SCROLL</a>
+    </section>
+
+    <section class="edits section" id="edits">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">SELECTED WORK</p>
+          <h2>FEATURED EDITS</h2>
+        </div>
+        <a class="text-link" href="https://youtube.com/@partizanovoper?si=gcBgaA5g1dwEPx7L" target="_blank" rel="noreferrer">VIEW ALL ↗</a>
+      </div>
+
+      <div class="edit-grid">
+        <a class="edit-card glass glass-reactive tilt reveal" href="https://youtube.com/@partizanovoper?si=gcBgaA5g1dwEPx7L" target="_blank" rel="noreferrer">
+          <img src="assets/edit-1.webp" alt="Dark tactical BODYCAM edit preview" loading="lazy" />
+          <div class="card-shade"></div>
+          <div class="card-top"><span>01</span><span>BODYCAM / EDIT</span></div>
+          <div class="card-bottom"><div><b>CLEARING</b><small>SELECTED CUT</small></div><span class="play">▶</span></div>
+        </a>
+        <a class="edit-card glass glass-reactive tilt reveal" href="https://youtube.com/@partizanovoper?si=gcBgaA5g1dwEPx7L" target="_blank" rel="noreferrer">
+          <img src="assets/edit-2.webp" alt="Monochrome tactical gameplay edit preview" loading="lazy" />
+          <div class="card-shade"></div>
+          <div class="card-top"><span>02</span><span>TACTICAL / EDIT</span></div>
+          <div class="card-bottom"><div><b>EXTRACTION</b><small>SELECTED CUT</small></div><span class="play">▶</span></div>
+        </a>
+        <a class="edit-card glass glass-reactive tilt reveal" href="https://youtube.com/@partizanovoper?si=gcBgaA5g1dwEPx7L" target="_blank" rel="noreferrer">
+          <img src="assets/edit-3.webp" alt="Night operation style gameplay edit preview" loading="lazy" />
+          <div class="card-shade"></div>
+          <div class="card-top"><span>03</span><span>NIGHT / EDIT</span></div>
+          <div class="card-bottom"><div><b>NIGHT OPS</b><small>SELECTED CUT</small></div><span class="play">▶</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <div class="about-panel glass glass-reactive reveal">
+        <div class="about-index">P / 06</div>
+        <div>
+          <p class="eyebrow">ABOUT</p>
+          <h2>I CUT THE MOMENT<br>BEFORE IT HITS.</h2>
+        </div>
+        <p>Partizanov is a personal edit space focused on BODYCAM, tactical gameplay, cinematic tension and heavy atmosphere — built for the scene, not the algorithm.</p>
+        <div class="about-tags"><span>BODYCAM</span><span>GAMES</span><span>CINEMATIC</span><span>MILITARY ATMOSPHERE</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>PARTIZANOV © 2026</span>
+    <span>GOOD SCENES / BETTER CUTS</span>
+    <a href="#top">BACK TO TOP ↑</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
