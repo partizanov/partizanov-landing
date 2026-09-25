@@ -1,60 +1,106 @@
 (() => {
   const root = document.documentElement;
+  const body = document.body;
   const nav = document.querySelector('.nav');
-  const art = document.querySelector('.hero-art');
-  const heroImage = document.querySelector('.hero-image');
-  const wordmark = document.querySelector('.wordmark');
-  const timecode = document.querySelector('.timecode');
+  const track = document.querySelector('.hero-track');
+  const weapon = document.querySelector('.weapon');
+  const orbit = document.querySelector('.manifesto-orbit');
+  const cursor = document.querySelector('.cursor-lens');
+  const clock = document.querySelector('.timecode');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
-  let previous = scrollY, scheduled = false;
-  function frame() {
+  const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+  let previousY = scrollY;
+  let scheduled = false;
+  let px = -100, py = -100, pointerVisible = false;
+
+  function render() {
     scheduled = false;
     const y = scrollY;
     const max = Math.max(1, root.scrollHeight - innerHeight);
-    root.style.setProperty('--progress', (100 * y / max).toFixed(2) + '%');
-    nav.classList.toggle('hide', y > 200 && y > previous + 3);
-    if (y < previous - 3 || y < 70) nav.classList.remove('hide');
-    previous = y;
-    if (!reduce && y < innerHeight * 1.3) {
-      const progress = Math.min(1, y / Math.max(1, innerHeight));
-      heroImage.style.transform = 'translate3d(0,' + (progress * 32).toFixed(1) + 'px,0) scale(1.04)';
-      wordmark.style.setProperty('opacity', (1 - progress * .28).toFixed(2));
-      wordmark.style.translate = '0 ' + (-progress * 30).toFixed(1) + 'px';
+    root.style.setProperty('--page-progress', (y / max * 100).toFixed(2) + '%');
+
+    if (y > 240 && y > previousY + 5) nav.classList.add('is-hidden');
+    if (y < previousY - 5 || y < 100) nav.classList.remove('is-hidden');
+    previousY = y;
+
+    if (!reduce) {
+      const rect = track.getBoundingClientRect();
+      const distance = Math.max(1, rect.height - innerHeight);
+      const p = clamp(-rect.top / distance);
+      root.style.setProperty('--hero-p', p.toFixed(3));
+      root.style.setProperty('--cut-p', clamp((p - .81) / .19).toFixed(3));
+      if (weapon) {
+        const w = weapon.getBoundingClientRect();
+        const wp = clamp((innerHeight - w.top) / (innerHeight + w.height));
+        weapon.style.setProperty('--weapon-y', ((.5 - wp) * 32).toFixed(1) + 'px');
+        weapon.style.setProperty('--weapon-rotate', ((wp - .5) * 2).toFixed(2) + 'deg');
+        weapon.style.setProperty('--weapon-beam', clamp((wp - .22) * 2.4).toFixed(3));
+      }
+      if (orbit) {
+        const m = orbit.getBoundingClientRect();
+        orbit.style.setProperty('--orbit-turn', ((innerHeight - m.top) / innerHeight * 32).toFixed(1) + 'deg');
+      }
+    }
+    if (fine && cursor) {
+      cursor.style.transform = 'translate3d(' + px + 'px,' + py + 'px,0) translate(-50%,-50%)';
+      cursor.style.opacity = pointerVisible ? '1' : '0';
     }
   }
-  addEventListener('scroll', () => {
-    if (!scheduled) { scheduled = true; requestAnimationFrame(frame); }
-  }, {passive:true});
-  frame();
-  if (fine && !reduce) {
-    let pending = false, x = 65, y = 35;
-    addEventListener('pointermove', event => {
-      x = event.clientX / innerWidth * 100;
-      y = event.clientY / innerHeight * 100;
-      if (!pending) requestAnimationFrame(() => {
-        pending = false;
-        art.style.setProperty('--lx', x + '%');
-        art.style.setProperty('--ly', y + '%');
+  function queue() {
+    if (!scheduled) { scheduled = true; requestAnimationFrame(render); }
+  }
+  addEventListener('scroll', queue, {passive:true});
+  addEventListener('resize', queue, {passive:true});
+  queue();
+
+  if (!reduce) {
+    body.classList.add('motion');
+    requestAnimationFrame(() => body.classList.add('is-ready'));
+    const revealTargets = document.querySelectorAll('.manifesto h2,.manifesto-note,.weapon-heading,.works-heading,.work-card,.rhythm-body,.about-visual,.about-copy,.finale-kicker,.finale h2,.finale-links');
+    revealTargets.forEach(el => el.classList.add('reveal'));
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
       });
-      pending = true;
-    }, {passive:true});
-  }
-  if (timecode && !reduce) {
-    const start = performance.now();
-    function tick() {
-      if (document.hidden) return;
-      const s = Math.floor((performance.now() - start) / 1000);
-      timecode.textContent = '00:' + String(Math.floor(s / 60) % 60).padStart(2,'0') + ':' + String(s % 60).padStart(2,'0');
+    }, {threshold:.12,rootMargin:'0px 0px -4% 0px'});
+    revealTargets.forEach(el => observer.observe(el));
+    const bars = document.querySelector('.rhythm-meter');
+    if (bars) {
+      for (let i = 0; i < 26; i++) {
+        const bar = document.createElement('i');
+        bar.style.setProperty('--h', (8 + ((i * 17) % 34)) + 'px');
+        bar.style.setProperty('--delay', ((i % 7) * -.13) + 's');
+        bars.append(bar);
+      }
     }
+  }
+
+  if (fine && !reduce && cursor) {
+    addEventListener('pointermove', event => {
+      px = event.clientX;
+      py = event.clientY;
+      pointerVisible = true;
+      queue();
+    }, {passive:true});
+    document.addEventListener('pointerleave', () => { pointerVisible = false; queue(); });
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('pointerenter', () => cursor.classList.add('is-link'));
+      link.addEventListener('pointerleave', () => cursor.classList.remove('is-link'));
+    });
+  }
+
+  if (clock && !reduce) {
+    const started = performance.now();
+    const tick = () => {
+      if (document.hidden) return;
+      const seconds = Math.floor((performance.now() - started) / 1000);
+      clock.textContent = '00:' + String(Math.floor(seconds / 60) % 60).padStart(2,'0') + ':' + String(seconds % 60).padStart(2,'0');
+    };
+    tick();
     setInterval(tick, 1000);
   }
-  document.querySelectorAll('img[data-fallback]').forEach(img => {
-    img.addEventListener('error', () => {
-      if (img.dataset.fallback) {
-        img.src = img.dataset.fallback;
-        delete img.dataset.fallback;
-      }
-    }, {once:true});
-  });
 })();
