@@ -37,10 +37,10 @@
 /* The opening frame is built from separate depth planes. The background moves
    least, the rear operator follows it, and the near operator moves most. */
 .scene-photo{background-image:url('/assets/night-rooftop.webp');background-position:60% 50%;transform:scale(calc(1.025 + var(--hero-p,0)*.055)) translate3d(calc(var(--camera-x,0)*-5px),calc(var(--camera-y,0)*-3px),0)}
-.hero-wordmark{width:min(960px,72vw);filter:drop-shadow(0 16px 22px rgba(0,0,0,.42))}
+.hero-wordmark{width:min(790px,62vw);filter:drop-shadow(0 16px 22px rgba(0,0,0,.42))}
 .hero-wordmark img{filter:none}
 .hero-copy{z-index:3}
-.operator-assembly{position:absolute;z-index:4;right:-2vw;bottom:-10svh;height:111svh;aspect-ratio:941/1672;pointer-events:none;perspective:1200px;filter:drop-shadow(-28px 30px 24px rgba(0,0,0,.55))}
+.operator-assembly{position:absolute;z-index:4;right:7vw;bottom:-10svh;height:111svh;aspect-ratio:941/1672;pointer-events:none;perspective:1200px;filter:drop-shadow(-28px 30px 24px rgba(0,0,0,.55))}
 .operator-plane{position:absolute;inset:0;transform-origin:65% 65%;backface-visibility:hidden;will-change:transform}
 .operator-plane img{display:block;width:100%;height:100%;object-fit:contain}
 .operator-rear{clip-path:inset(0 0 0 64%);transform:translate3d(calc(var(--camera-x,0)*11px + var(--hero-p,0)*-9px),calc(var(--camera-y,0)*8px + var(--hero-p,0)*-13px),-18px) rotateY(calc(var(--camera-x,0)*-1.3deg))}
