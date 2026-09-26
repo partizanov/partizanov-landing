@@ -2,7 +2,7 @@
 <defs>
   <mask id="cut" maskUnits="userSpaceOnUse" x="0" y="0" width="426" height="143">
     <rect x="0" y="0" width="426" height="143" fill="white"/>
-    <g fill="black"><path d="M53.9 18 L80.0 18 L80.0 38 Z"/><path d="M73.1 142 L105.3 142 L73.1 113 Z"/><path d="M160.0 142 L192.3 142 L160.0 113 Z"/><path d="M247.0 142 L282.3 142 L247.0 113 Z"/><path d="M401.2 18 L428.2 18 L428.2 38 Z"/><path d="M343.2 142 L372.4 142 L343.2 113 Z"/></g>
+    <g fill="black"><path d="M64.7 18 L79.0 18 L79.0 30 Z"/><path d="M73.1 142 L92.0 142 L73.1 126 Z"/><path d="M160.0 142 L178.9 142 L160.0 126 Z"/><path d="M247.0 142 L267.6 142 L247.0 126 Z"/><path d="M412.4 18 L427.2 18 L427.2 30 Z"/><path d="M343.2 142 L360.4 142 L343.2 126 Z"/></g>
   </mask>
 </defs>
 <g fill="#f3f4f5" mask="url(#cut)"><path d="M481 127H170L479 600V718H28V591H325L20 127V0H481Z" transform="translate(0.0 137) scale(0.15372 -.183)"/><path d="M187 148H404L442 0H576L368 718H226L16 0H146ZM296 559 370 271H220Z" transform="translate(75.1 137) scale(0.15006 -.183)"/><path d="M422 214 186 718H57V0H171V515L414 0H536V718H422Z" transform="translate(162.0 137) scale(0.15006 -.183)"/><path d="M323 737C241 737 167 703 117 642C64 578 36 481 36 358C36 269 51 194 79 135C126 39 216 -19 319 -19C398 -19 472 16 521 76C574 140 602 237 602 359C602 480 574 578 521 642C472 701 398 737 323 737ZM321 610C360 610 399 591 425 558C460 516 479 447 479 362C479 203 419 108 319 108C219 108 159 203 159 361C159 516 220 610 321 610Z" transform="translate(249.0 137) scale(0.15372 -.183)"/><path d="M275 170 148 718H16L214 0H331L531 718H403Z" transform="translate(345.2 137) scale(0.14640 -.183)"/></g>
