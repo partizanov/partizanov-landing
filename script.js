@@ -5,6 +5,10 @@
   const track = document.querySelector('.hero-track');
   const weapon = document.querySelector('.weapon');
   const orbit = document.querySelector('.manifesto-orbit');
+  const cards = [...document.querySelectorAll('.work-card')];
+  const rhythm = document.querySelector('.rhythm');
+  const object = document.querySelector('.about-object');
+  const about = document.querySelector('.about');
   const cursor = document.querySelector('.cursor-lens');
   const clock = document.querySelector('.timecode');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -40,6 +44,25 @@
       if (orbit) {
         const m = orbit.getBoundingClientRect();
         orbit.style.setProperty('--orbit-turn', ((innerHeight - m.top) / innerHeight * 32).toFixed(1) + 'deg');
+      }
+      cards.forEach(card => {
+        const r = card.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const p = clamp((innerHeight - r.top) / (innerHeight + r.height));
+        card.style.setProperty('--card-scale', (1.13 - p * .11).toFixed(3));
+        card.style.setProperty('--card-y', ((p - .5) * -20).toFixed(1) + 'px');
+      });
+      if (rhythm) {
+        const r = rhythm.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < innerHeight) {
+          rhythm.style.setProperty('--rhythm-scale', (1 + clamp((innerHeight - r.top) / (innerHeight + r.height)) * .2).toFixed(3));
+        }
+      }
+      if (object && about) {
+        const r = about.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < innerHeight) {
+          object.style.setProperty('--object-turn', ((.5 - clamp((innerHeight - r.top) / (innerHeight + r.height))) * 28).toFixed(2) + 'deg');
+        }
       }
     }
     if (fine && cursor) {
