@@ -33,3 +33,33 @@
 @media(max-width:360px){:root{--pad:16px}.nav-brand img{width:100px}.hero-wordmark{width:100%}.glass-spec{display:none}.hero-statement{font-size:20px}.glass-link{font-size:8px;padding:0 8px}.glass-link:active,.finale-links a:active{transform:scale(.96)}.glass-link svg{width:17px;height:17px}.scroll-cue{bottom:68px}.glass-spec{bottom:25%;width:82px;height:82px}.manifesto h2{font-size:15.5vw}.work-card,.card-a{min-height:410px;height:73svh}.card-copy strong,.card-b .card-copy strong,.card-c .card-copy strong{font-size:13vw}}
 @media(min-width:801px) and (hover:hover) and (pointer:fine){.cursor-lens{display:grid;place-items:center;position:fixed;top:0;left:0;width:42px;height:42px;border:1px solid rgba(255,255,255,.65);border-radius:50%;z-index:200;pointer-events:none;transform:translate3d(-100px,-100px,0) translate(-50%,-50%);box-shadow:inset 0 0 9px rgba(255,255,255,.25),0 0 22px rgba(240,25,51,.26);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);transition:width .22s,height .22s,border-color .22s}.cursor-lens i{width:5px;height:5px;background:var(--red);border-radius:50%;box-shadow:0 0 8px var(--red)}.cursor-lens.is-link{width:68px;height:68px;border-color:var(--red)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.hero-track{height:100svh}.hero-cut,.cursor-lens,.title-scan,.weapon-beam{display:none!important}.scene-photo,.hero-copy,.word-line,.word-second,.weapon-rig,.about-object{transform:none!important}.work-card img{transform:none!important}}
+
+/* The opening frame is built from separate depth planes. The background moves
+   least, the rear operator follows it, and the near operator moves most. */
+.scene-photo{background-image:url('/assets/night-rooftop.webp');background-position:60% 50%;transform:scale(calc(1.025 + var(--hero-p,0)*.055)) translate3d(calc(var(--camera-x,0)*-5px),calc(var(--camera-y,0)*-3px),0)}
+.hero-wordmark{width:min(790px,62vw);filter:drop-shadow(0 16px 22px rgba(0,0,0,.42))}
+.hero-wordmark img{filter:none}
+.hero-copy{z-index:3}
+.operator-assembly{position:absolute;z-index:4;right:7vw;bottom:-10svh;height:111svh;aspect-ratio:941/1672;pointer-events:none;perspective:1200px;filter:drop-shadow(-28px 30px 24px rgba(0,0,0,.55))}
+.operator-plane{position:absolute;inset:0;transform-origin:65% 65%;backface-visibility:hidden;will-change:transform}
+.operator-plane img{display:block;width:100%;height:100%;object-fit:contain}
+.operator-rear{clip-path:inset(0 0 0 64%);transform:translate3d(calc(var(--camera-x,0)*11px + var(--hero-p,0)*-9px),calc(var(--camera-y,0)*8px + var(--hero-p,0)*-13px),-18px) rotateY(calc(var(--camera-x,0)*-1.3deg))}
+.operator-front{clip-path:inset(0 25% 0 0);transform:translate3d(calc(var(--camera-x,0)*24px + var(--hero-p,0)*-24px),calc(var(--camera-y,0)*16px + var(--hero-p,0)*-35px),18px) rotateY(calc(var(--camera-x,0)*-2.5deg))}
+.hero-copy-front{z-index:5;pointer-events:none;clip-path:polygon(0 0,62% 0,68% 100%,0 100%);filter:none}
+.hero-copy-front .eyebrow{visibility:hidden}
+.hero-copy-front .hero-wordmark{filter:none}
+.hero-meta,.glass-spec{z-index:6}
+.title-scan{display:none}
+@media(hover:hover) and (pointer:fine){.operator-plane{transition:transform .18s ease-out}}
+@media(max-width:800px){
+  .scene-photo{background-position:61% 50%}
+  .hero-wordmark{width:100%}
+  .operator-assembly{height:89svh;right:-37vw;bottom:-7svh;filter:drop-shadow(-15px 18px 15px rgba(0,0,0,.58))}
+  .hero-copy-front{clip-path:polygon(0 0,67% 0,72% 100%,0 100%)}
+  .operator-rear{transform:translate3d(calc(var(--hero-p,0)*-7px),calc(var(--hero-p,0)*-12px),-18px)}
+  .operator-front{transform:translate3d(calc(var(--hero-p,0)*-20px),calc(var(--hero-p,0)*-32px),18px)}
+  .hero-statement{position:relative;z-index:7;text-shadow:0 3px 15px #000,0 0 20px #000}
+  .glass-spec{right:16px;bottom:21%}
+}
+@media(max-width:360px){.operator-assembly{height:86svh;right:-42vw}.hero-copy-front{clip-path:polygon(0 0,72% 0,76% 100%,0 100%)}}
+@media(prefers-reduced-motion:reduce){.scene-photo,.operator-plane{transform:none!important;transition:none!important}.hero-copy-front{clip-path:polygon(0 0,62% 0,68% 100%,0 100%)}}

@@ -3,6 +3,7 @@
   const body = document.body;
   const nav = document.querySelector('.nav');
   const track = document.querySelector('.hero-track');
+  const hero = document.querySelector('.hero');
   const weapon = document.querySelector('.weapon');
   const orbit = document.querySelector('.manifesto-orbit');
   const cards = [...document.querySelectorAll('.work-card')];
@@ -17,6 +18,7 @@
   let previousY = scrollY;
   let scheduled = false;
   let px = -100, py = -100, pointerVisible = false;
+  let cameraX = 0, cameraY = 0;
 
   function render() {
     scheduled = false;
@@ -34,6 +36,10 @@
       const p = clamp(-rect.top / distance);
       root.style.setProperty('--hero-p', p.toFixed(3));
       root.style.setProperty('--cut-p', clamp((p - .81) / .19).toFixed(3));
+      if (hero) {
+        hero.style.setProperty('--camera-x', cameraX.toFixed(3));
+        hero.style.setProperty('--camera-y', cameraY.toFixed(3));
+      }
       if (weapon) {
         const w = weapon.getBoundingClientRect();
         const wp = clamp((innerHeight - w.top) / (innerHeight + w.height));
@@ -106,10 +112,12 @@
     addEventListener('pointermove', event => {
       px = event.clientX;
       py = event.clientY;
+      cameraX = Math.max(-1, Math.min(1, (event.clientX / innerWidth - .5) * 2));
+      cameraY = Math.max(-1, Math.min(1, (event.clientY / innerHeight - .5) * 2));
       pointerVisible = true;
       queue();
     }, {passive:true});
-    document.addEventListener('pointerleave', () => { pointerVisible = false; queue(); });
+    document.addEventListener('pointerleave', () => { pointerVisible = false; cameraX = cameraY = 0; queue(); });
     document.querySelectorAll('a').forEach(link => {
       link.addEventListener('pointerenter', () => cursor.classList.add('is-link'));
       link.addEventListener('pointerleave', () => cursor.classList.remove('is-link'));
