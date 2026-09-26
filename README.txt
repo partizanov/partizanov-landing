@@ -1,4 +1,7 @@
-PARTIZANOV — personal BODYCAM edit archive.
-Static mobile-first site. Hero and fallback artwork in assets/.
-Featured cards link to three verified YouTube Shorts by @PartizanovOper.
+PARTIZANOV — личный сайт игровых эдитов.
+
+Mobile-first статический сайт с тремя сценами: Мир, Эдиты, Обо мне. У каждой свой фон и движение; палитра общая — чёрный, белый и красный акцент. Ночная тактическая сцена и оружие — оригинальные иллюстрации, а не кадры Ready or Not. Луч в оружейном разделе привязан к модулю и направлен параллельно стволу.
+
+Три карточки ведут к конкретным YouTube Shorts @PartizanovOper. Основные направления — YouTube Shorts и TikTok; визуальная тема может меняться вместе с играми.
+
 Production: https://partizanov-landing.vercel.app
